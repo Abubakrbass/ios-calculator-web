@@ -327,3 +327,18 @@ body.light-theme .donate-panel {
     cursor: pointer;
 }
 .donate-link:active { transform: scale(0.98); }
+
+.donate-qr {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 15px;
+    display: block;
+    margin: 10px auto 0 auto;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.donate-qr:active {
+    transform: scale(0.98);
+}
