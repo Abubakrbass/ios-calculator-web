@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>iOS Calculator</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="calculator">
+        <button id="history-btn" onclick="toggleHistory()">🕒</button>
+        <button id="donate-btn" onclick="toggleDonate()">❤️</button>
+        <button id="theme-switcher">🌙</button>
+        <div class="display" id="display">0</div>
+        <div id="copy-tooltip" class="copy-tooltip">Скопировано</div>
+        <div class="buttons">
+            <!-- Ряд 1 -->
+            <button class="btn-grey" onclick="clearDisplay()">AC</button>
+            <button class="btn-grey" onclick="toggleSign()">+/-</button>
+            <button class="btn-grey" onclick="percentage()">%</button>
+            <button class="btn-orange" data-op="/" onclick="setOperator('/')">÷</button>
+
+            <!-- Ряд 2 -->
+            <button class="btn-dark" onclick="appendNumber('7')">7</button>
+            <button class="btn-dark" onclick="appendNumber('8')">8</button>
+            <button class="btn-dark" onclick="appendNumber('9')">9</button>
+            <button class="btn-orange" data-op="*" onclick="setOperator('*')">×</button>
+
+            <!-- Ряд 3 -->
+            <button class="btn-dark" onclick="appendNumber('4')">4</button>
+            <button class="btn-dark" onclick="appendNumber('5')">5</button>
+            <button class="btn-dark" onclick="appendNumber('6')">6</button>
+            <button class="btn-orange" data-op="-" onclick="setOperator('-')">−</button>
+
+            <!-- Ряд 4 -->
+            <button class="btn-dark" onclick="appendNumber('1')">1</button>
+            <button class="btn-dark" onclick="appendNumber('2')">2</button>
+            <button class="btn-dark" onclick="appendNumber('3')">3</button>
+            <button class="btn-orange" data-op="+" onclick="setOperator('+')">+</button>
+
+            <!-- Ряд 5 -->
+            <button class="btn-dark btn-zero" onclick="appendNumber('0')">0</button>
+            <button class="btn-dark" onclick="appendDot()">,</button>
+            <button class="btn-orange" onclick="calculate()">=</button>
+        </div>
+
+        <!-- Панель истории -->
+        <div id="history-panel" class="history-panel">
+            <div class="history-header">
+                <span>История</span>
+                <button onclick="toggleHistory()" style="background:none; border:none; font-size:24px; color:inherit;">✕</button>
+            </div>
+            <div id="history-list" class="history-list"></div>
+            <button class="btn-grey" style="width:100%; border-radius:15px; height:50px; font-size:20px;" onclick="clearHistory()">Очистить</button>
+        </div>
+
+        <!-- Панель донатов -->
+        <div id="donate-panel" class="donate-panel">
+            <div class="donate-header">
+                <span>Поддержать автора</span>
+                <button onclick="toggleDonate()" style="background:none; border:none; font-size:24px; color:inherit; cursor:pointer;">✕</button>
+            </div>
+            <div class="donate-content">
+                <p>Если вам нравится этот проект, вы можете угостить меня кофе! ☕</p>
+                <!-- Вставьте сюда вашу ссылку на донат (например, Boosty или Buy Me a Coffee) -->
+                <a href="https://boosty.to/ВАШ_НИКНЕЙМ" target="_blank" class="donate-link" onclick="triggerDonateConfetti()">☕ Поддержать на Boosty</a>
+                <!-- Вставьте ваш номер карты ниже вместо нулей -->
+                <button class="donate-link" onclick="copyDonateInfo('0000 0000 0000 0000'); triggerDonateConfetti()">💳 Скопировать номер карты</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
