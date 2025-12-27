@@ -27,26 +27,25 @@ function triggerDonateConfetti() {
     }
 }
 
-function copyDonateInfo(info) {
-    navigator.clipboard.writeText(info).then(() => {
-        const tooltip = document.getElementById('copy-tooltip');
-        const originalText = tooltip.innerText;
-        tooltip.innerText = "Номер скопирован";
-        tooltip.classList.add('visible');
-        setTimeout(() => {
-            tooltip.classList.remove('visible');
-            setTimeout(() => tooltip.innerText = originalText, 300);
-        }, 1500);
-    }).catch(err => console.error('Ошибка копирования:', err));
-}
-
 function renderHistory() {
     const list = document.getElementById('history-list');
     list.innerHTML = '';
     history.forEach(item => {
         const div = document.createElement('div');
         div.className = 'history-item';
-        div.innerHTML = `<div class="history-expr">${item.expr}</div><div class="history-res">${item.res}</div>`;
+        
+        // Безопасное создание элементов (защита от XSS)
+        const exprDiv = document.createElement('div');
+        exprDiv.className = 'history-expr';
+        exprDiv.textContent = item.expr;
+
+        const resDiv = document.createElement('div');
+        resDiv.className = 'history-res';
+        resDiv.textContent = item.res;
+
+        div.appendChild(exprDiv);
+        div.appendChild(resDiv);
+
         div.onclick = () => {
             currentInput = item.res.toString();
             updateDisplay();
