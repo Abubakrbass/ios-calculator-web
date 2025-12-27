@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>iOS Calculator</title>
+    <meta name="description" content="Бесплатный онлайн калькулятор в стиле iOS. Поддержка темной темы, истории вычислений и установки на телефон (PWA).">
+    <meta name="keywords" content="калькулятор, онлайн калькулятор, iOS калькулятор, iphone calculator, веб калькулятор">
+    <!-- Open Graph для красивых ссылок в соцсетях -->
+    <meta property="og:title" content="iOS Calculator Web">
+    <meta property="og:description" content="Точная копия калькулятора iPhone в вашем браузере.">
+    <meta property="og:image" content="icon-512.png">
+    <meta property="og:type" content="website">
+    <!-- Политика безопасности (CSP): Разрешаем загрузку только с нашего сайта и cdn.jsdelivr.net для конфетти -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <link rel="apple-touch-icon" href="icon-192.png">
@@ -65,11 +74,9 @@
                 <button onclick="toggleDonate()" style="background:none; border:none; font-size:24px; color:inherit; cursor:pointer;">✕</button>
             </div>
             <div class="donate-content">
-                <p>Если вам нравится этот проект, вы можете угостить меня кофе! ☕</p>
-                <!-- Вставьте сюда вашу ссылку на донат (например, Boosty или Buy Me a Coffee) -->
-                <a href="https://boosty.to/ВАШ_НИКНЕЙМ" target="_blank" class="donate-link" onclick="triggerDonateConfetti()">☕ Поддержать на Boosty</a>
-                <!-- Вставьте ваш номер карты ниже вместо нулей -->
-                <button class="donate-link" onclick="copyDonateInfo('0000 0000 0000 0000'); triggerDonateConfetti()">💳 Скопировать номер карты</button>
+                <p>Отсканируйте QR-код в приложении банка, чтобы поддержать автора! ☕</p>
+                <!-- Положите файл с QR-кодом в папку проекта и назовите его qr-code.jpg -->
+                <img src="qr-code.jpg" alt="QR Code" class="donate-qr" onclick="triggerDonateConfetti()">
             </div>
         </div>
     </div>
