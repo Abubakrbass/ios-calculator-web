@@ -1,10 +1,14 @@
-const CACHE_NAME = 'calculator-v4';
+const CACHE_NAME = 'calculator-v9';
 const ASSETS = [
     './',
     './index.html',
     './style.css',
     './script.js',
-    './manifest.json'
+    './manifest.json',
+    './icon-192.png',
+    './icon-512.png',
+    './qr-code.jpg',
+    'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js'
 ];
 
 self.addEventListener('install', (event) => {
