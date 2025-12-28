@@ -193,6 +193,19 @@ body.light-theme .btn-orange.active-operator {
 }
 body.light-theme #history-btn { color: black; }
 
+#share-btn {
+    position: absolute;
+    top: 20px;
+    right: 70px; /* Слева от переключателя темы */
+    font-size: 24px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+}
+body.light-theme #share-btn { color: black; }
+
 #donate-btn {
     position: absolute;
     top: 20px;
@@ -329,9 +342,9 @@ body.light-theme .donate-panel {
 .donate-link:active { transform: scale(0.98); }
 
 .donate-qr {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
     border-radius: 15px;
     display: block;
     margin: 10px auto 0 auto;
