@@ -16,14 +16,19 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="icon" href="icon-192.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Заставка (Splash Screen) -->
+    <div id="splash-screen">
+        <img src="icon-192.png" alt="Logo" class="splash-logo">
+    </div>
+
     <div class="calculator">
         <button id="history-btn" onclick="toggleHistory()">🕒</button>
         <button id="donate-btn" onclick="toggleDonate()">❤️</button>
-        <button id="share-btn" onclick="shareApp()">📤</button>
         <button id="theme-switcher">🌙</button>
         <div class="display" id="display">0</div>
         <div id="copy-tooltip" class="copy-tooltip">Скопировано</div>
