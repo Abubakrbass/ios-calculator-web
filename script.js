@@ -17,6 +17,28 @@ function toggleDonate() {
     panel.classList.toggle('open');
 }
 
+function shareApp() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'iOS Calculator',
+            text: 'Зацени этот крутой калькулятор в стиле iOS!',
+            url: window.location.href
+        })
+        .catch((error) => console.log('Ошибка при попытке поделиться', error));
+    } else {
+        // Если браузер не поддерживает share, просто копируем ссылку
+        navigator.clipboard.writeText(window.location.href);
+        const tooltip = document.getElementById('copy-tooltip');
+        const originalText = tooltip.innerText;
+        tooltip.innerText = "Ссылка скопирована";
+        tooltip.classList.add('visible');
+        setTimeout(() => {
+            tooltip.classList.remove('visible');
+            setTimeout(() => tooltip.innerText = originalText, 300);
+        }, 1500);
+    }
+}
+
 function triggerDonateConfetti() {
     if (typeof confetti === 'function') {
         confetti({
