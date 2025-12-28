@@ -17,28 +17,6 @@ function toggleDonate() {
     panel.classList.toggle('open');
 }
 
-function shareApp() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'iOS Calculator',
-            text: 'Зацени этот крутой калькулятор в стиле iOS!',
-            url: window.location.href
-        })
-        .catch((error) => console.log('Ошибка при попытке поделиться', error));
-    } else {
-        // Если браузер не поддерживает share, просто копируем ссылку
-        navigator.clipboard.writeText(window.location.href);
-        const tooltip = document.getElementById('copy-tooltip');
-        const originalText = tooltip.innerText;
-        tooltip.innerText = "Ссылка скопирована";
-        tooltip.classList.add('visible');
-        setTimeout(() => {
-            tooltip.classList.remove('visible');
-            setTimeout(() => tooltip.innerText = originalText, 300);
-        }, 1500);
-    }
-}
-
 function triggerDonateConfetti() {
     if (typeof confetti === 'function') {
         confetti({
@@ -127,6 +105,30 @@ function playClickSound() {
 
     oscillator.start();
     oscillator.stop(audioCtx.currentTime + 0.05);
+}
+
+function playStartupSound() {
+    // Попытка запустить аудиоконтекст (браузеры могут блокировать автовоспроизведение без клика)
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+    }
+    
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    // Приятный "взлетающий" звук (Sine wave)
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(300, audioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.4);
+
+    gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.4);
 }
 
 // Добавляем звук ко всем кнопкам при клике
@@ -439,3 +441,11 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log('Ошибка регистрации Service Worker', err));
     });
 }
+
+// Управление заставкой (Splash Screen)
+window.addEventListener('load', () => {
+    playStartupSound();
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 800); // Заставка видна минимум 0.8 секунды
+});
